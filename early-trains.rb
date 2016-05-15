@@ -3,18 +3,14 @@
 # Script to find trains that leave Denham early
 # (it is really annoying)
 #
+# I run this script once an hour using cron
+#
 
 require 'bundler/setup'
 
 Bundler.require(:default)
 
 USER_AGENT = 'early-trains.rb (please give njh@aelius.com an API key)'
-
-class Date
-  def self.yesterday
-    today - 1
-  end
-end
 
 def to_minutes(time)
   if time.match(/(\d\d)(\d\d)(.?)/)
@@ -26,8 +22,11 @@ def to_minutes(time)
   end
 end
 
-date = Date.yesterday.strftime("%Y/%m/%d")
-url = "http://www.realtimetrains.co.uk/search/advanced/DNM/#{date}/0400-0200?stp=WVS&show=pax-calls&order=wtt"
+date = Date.today.strftime("%Y/%m/%d")
+hour = Time.now.strftime("%H").to_i
+time = sprintf("%2.2d00-%2.2d01", hour-1, hour)
+url = "http://www.realtimetrains.co.uk/search/advanced/DNM/#{date}/#{time}?stp=WVS&show=pax-calls&order=wtt"
+
 response = RestClient.get(url, :user_agent => USER_AGENT)
 doc = Nokogiri::HTML(response)
 
@@ -41,7 +40,7 @@ doc.css("tr.call_public").each do |service|
     puts "Train left Denham at last a minute early:"
     puts "      Route: #{origin} to #{destination}"
     puts "    Planned: #{planned_departure}"
-    puts "     Actual: #{actual_departure}"
+    puts "     Actual: #{actual_departure} (#{diff.abs}min early)"
     puts
   end
 end
