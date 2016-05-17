@@ -58,7 +58,7 @@ end
 puts
 
 percent = sprintf("%1.1f%", (early.to_f/total.to_f) * 100)
-date = Date.yesterday.strftime("%a %e %B")
-puts "On #{date}, #{early}/#{total} of @chilternrailway trains left Denham early (#{percent})"
+date = Date.yesterday.strftime("%A %e %B")
+puts "On #{date}, #{early}/#{total} of @chilternrailway trains left Denham station early (#{percent})"
 puts
 puts url
