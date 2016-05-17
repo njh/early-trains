@@ -38,7 +38,11 @@ doc.css("tr.call_public").each do |service|
   planned_arrival,planned_departure = service.css(".time").map {|l| l.inner_text}
   actual_arrival,actual_departure = service.css(".realtime").map {|l| l.inner_text}
 
-  diff = to_minutes(actual_departure) - to_minutes(planned_departure)
+  actual_mins = to_minutes(actual_departure)
+  planned_mins = to_minutes(planned_departure)
+  next if actual_mins.nil? or planned_mins.nil?
+
+  diff = actual_mins - planned_mins
   if diff < 0.0
     early += 1
     puts "Train left Denham early:"
