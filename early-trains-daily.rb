@@ -43,7 +43,7 @@ doc.css("tr.call_public").each do |service|
   next if actual_mins.nil? or planned_mins.nil?
 
   diff = actual_mins - planned_mins
-  if diff <= -0.5
+  if diff <= -1.0
     early += 1
     puts "Train left Denham early:"
     puts "      Route: #{origin} to #{destination}"
@@ -59,6 +59,6 @@ puts
 
 percent = sprintf("%1.1f%", (early.to_f/total.to_f) * 100)
 date = Date.yesterday.strftime("%A %e %B")
-puts "On #{date}, #{early}/#{total} of @chilternrailway trains left Denham station 30 seconds or more early (#{percent})"
+puts "On #{date}, #{early}/#{total} of @chilternrailway trains left Denham station 1 minute or more early (#{percent})"
 puts
 puts url
