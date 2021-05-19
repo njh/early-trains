@@ -33,10 +33,10 @@ doc = Nokogiri::HTML(response)
 
 total = 0
 early = 0
-doc.css("tr.call_public").each do |service|
+doc.css(".servicelist/.service").each do |service|
   origin,destination = service.css(".location").map {|l| l.inner_text}
-  planned_arrival,planned_departure = service.css(".time").map {|l| l.inner_text}
-  actual_arrival,actual_departure = service.css(".realtime").map {|l| l.inner_text}
+  planned_arrival,planned_departure = service.css(".time.plan").map {|l| l.inner_text}
+  actual_arrival,actual_departure = service.css(".time.real").map {|l| l.inner_text}
 
   actual_mins = to_minutes(actual_departure)
   planned_mins = to_minutes(planned_departure)
