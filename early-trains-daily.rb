@@ -57,7 +57,7 @@ end
 
 puts
 
-percent = sprintf("%1.1f%", (early.to_f/total.to_f) * 100)
+percent = sprintf("%1.1f%%", (early.to_f/total.to_f) * 100)
 date = Date.yesterday.strftime("%A %e %B")
 puts "On #{date}, #{early}/#{total} of @chilternrailway trains left Denham station 1 minute or more early (#{percent})"
 puts
