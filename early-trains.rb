@@ -41,7 +41,7 @@ doc.css("tr.call_public").each do |service|
 
   diff = actual_mins - planned_mins
   if diff <= -1.0
-    puts "Train left Denham at last a minute early:"
+    puts "Train left Denham at least a minute early:"
     puts "      Route: #{origin} to #{destination}"
     puts "    Planned: #{planned_departure}"
     puts "     Actual: #{actual_departure} (#{diff.abs}min early)"
