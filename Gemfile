@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
 
 
-gem 'nokogiri', '~> 1.11.4'
+gem 'nokogiri', '~> 1.13.3'
 gem 'rest-client'
